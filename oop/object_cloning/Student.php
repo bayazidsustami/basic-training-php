@@ -9,4 +9,9 @@ class Student{
     {
         unset($this->grade); // not clone
     }
+
+    public function __toString()
+    {
+        return "$this->id, $this->name, $this->grade" . PHP_EOL;
+    }
 }

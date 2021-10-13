@@ -14,3 +14,6 @@ $student2->grade = 3;
 
 var_dump($student1 == $student2); //comparing all properties
 var_dump($student1 === $student2); //comparing with reference
+
+$objToString = (string)$student1;
+var_dump($objToString);
