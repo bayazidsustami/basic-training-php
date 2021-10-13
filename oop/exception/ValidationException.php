@@ -6,8 +6,15 @@ class ValidationException extends Exception
 
 class LoginRequest
 {
+    #[NotBlank]
     var string $username;
+    #[NotBlank]
     var string $password;
+}
+
+#[Attribute(Attribute::TARGET_PROPERTY)] //like annotation in java
+class NotBlank{
+
 }
 
 class ValidateUtil
