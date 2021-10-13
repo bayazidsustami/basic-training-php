@@ -4,6 +4,9 @@ require_once("Manager.php");
 
 class VicePresident extends Manager
 {
+
+    //union types
+    private int|float $number;
     //function overriding or overwrite the function in parent class
     function runTheShow(): void
     {
