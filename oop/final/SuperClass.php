@@ -1,7 +1,11 @@
 <?php
 
 final class SocialMedia{
-    var string $account;
+    
+    public function __construct(
+        public string $name = ""
+    ){}
+
     final public function login(string $username): bool
     {
         return false;
