@@ -12,7 +12,7 @@ class LoginRequest
     var string $password;
 }
 
-#[Attribute(Attribute::TARGET_PROPERTY)] //like annotation in java
+#[Attribute] //like annotation in java
 class NotBlank{
 
 }
