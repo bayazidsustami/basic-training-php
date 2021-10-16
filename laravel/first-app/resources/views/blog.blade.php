@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('container')
+
     @foreach ($blogs as $blog)
         <article class="mb-5 border-bottom pb-3">
             <h2>
@@ -8,7 +9,7 @@
 
             <p>By : 
                 <span class="badge bg-primary bg-light text-dark">
-                    <a href="#" class="text-decoration-none">{{ $blog->user->name }}</a>
+                    <a href="/author/{{ $blog->author->name }}" class="text-decoration-none">{{ $blog->author->name }}</a>
                 </span> 
                 in 
                 <a href="/category/{{ $blog->category->slug }}" class="text-decoration-none"> {{ $blog->category->name }}</a>

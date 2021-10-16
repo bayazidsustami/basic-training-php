@@ -1,9 +1,10 @@
 <?php
 
 use App\Models\Blog;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
-use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,5 +51,13 @@ Route::get('/category/{category:slug}', function (Category $category) {
         "title" => $category->name,
         "blogs" => $category->blogs,
         "category" => $category->name,
+    ]);
+});
+
+//make sure the name in the path is the same as in the param closure
+Route::get('/author/{author:name}', function (User $author) {
+    return view('blog', [
+        "title" => "User Blogs",
+        "blogs" => $author->blogs,
     ]);
 });
