@@ -12,7 +12,8 @@ class BlogController extends Controller
         return view('blog', [
             "title" => "All Posts",
             //"blogs" => Blog::all(),
-            "blogs" => Blog::latest()->get(),
+            //"blogs" => Blog::latest()->get(),
+            "blogs" => Blog::with(['author', 'category'])->latest()->get(), //eager loading using `with` resolve N+1 prombles
         ]);
     }
 
