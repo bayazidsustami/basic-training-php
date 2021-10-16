@@ -11,13 +11,18 @@ class Blog extends Model
 
     //mass assignment
     //allows you to fill field one time exec using ::create()
-    protected $fillable = [
-        'title',
-        'slug',
-        'excerpt',
-        'body',
-    ];
+    // protected $fillable = [
+    //     'title',
+    //     'slug',
+    //     'excerpt',
+    //     'body',
+    // ];
 
     //restrict to filled field
     protected $guarded = ['id'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
