@@ -47,17 +47,16 @@ Route::get('/categories', function () {
 });
 
 Route::get('/category/{category:slug}', function (Category $category) {
-    return view('category', [
-        "title" => $category->name,
+    return view('blog', [
+        "title" => "Post by Category : $category->name",
         "blogs" => $category->blogs,
-        "category" => $category->name,
     ]);
 });
 
 //make sure the name in the path is the same as in the param closure
 Route::get('/author/{author:name}', function (User $author) {
     return view('blog', [
-        "title" => "User Blogs",
+        "title" => "Post by Author : $author->name",
         "blogs" => $author->blogs,
     ]);
 });
