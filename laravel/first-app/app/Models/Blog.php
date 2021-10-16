@@ -21,6 +21,11 @@ class Blog extends Model
     //restrict to filled field
     protected $guarded = ['id'];
 
+    protected $with = [
+        'category',
+        'author'
+    ]; //equals on with eager loading
+
     public function category()
     {
         return $this->belongsTo(Category::class);

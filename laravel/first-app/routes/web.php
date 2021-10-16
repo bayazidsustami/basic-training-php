@@ -20,13 +20,15 @@ use App\Http\Controllers\BlogController;
 Route::get('/', function () {
     //view('welcome');
     return view('home', [
-        "title" => "Home"
+        "title" => "Home",
+        "active" => "home"
     ]);
 });
 
 Route::get('/about', function () {
     return view('about', [
         "title" => "About",
+        "active" => "about",
         "name" => "bays",
         "email" => "bay@mail.com",
         "image" => "photo_2.jpg"
@@ -42,6 +44,7 @@ Route::get('blogs/{post:slug}', [BlogController::class, 'showDetail']);
 Route::get('/categories', function () {
     return view('categories', [
         "title" => "Blog Categories",
+        "active" => "categories",
         "categories" => Category::all(),
     ]);
 });
@@ -49,6 +52,7 @@ Route::get('/categories', function () {
 Route::get('/category/{category:slug}', function (Category $category) {
     return view('blog', [
         "title" => "Post by Category : $category->name",
+        "active" => "categories",
         "blogs" => $category->blogs->load('author', 'category'), //eager lazy loading using `load`
     ]);
 });
@@ -57,6 +61,7 @@ Route::get('/category/{category:slug}', function (Category $category) {
 Route::get('/author/{author:name}', function (User $author) {
     return view('blog', [
         "title" => "Post by Author : $author->name",
+        "active" => "categories",
         "blogs" => $author->blogs->load('category', 'author'),
     ]);
 });

@@ -11,9 +11,11 @@ class BlogController extends Controller
     {
         return view('blog', [
             "title" => "All Posts",
+            "active" => "blogs",
             //"blogs" => Blog::all(),
             //"blogs" => Blog::latest()->get(),
-            "blogs" => Blog::with(['author', 'category'])->latest()->get(), //eager loading using `with` resolve N+1 prombles
+            //eager loading using `with` resolve N+1 prombles
+            "blogs" => Blog::latest()->get(),
         ]);
     }
 
@@ -21,6 +23,7 @@ class BlogController extends Controller
     {
         return view('blog_detail', [
             "title" => "Details Blog",
+            "active" => "blogs",
             "post" => $post,
         ]);
     }

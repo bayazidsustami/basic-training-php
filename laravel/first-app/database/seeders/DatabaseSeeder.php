@@ -20,17 +20,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        User::factory(5)->create();
 
-        // Category::create([
-        //     "name" => "Web Programming",
-        //     "slug" => "web-programming"
-        // ]);
-        // Category::create([
-        //     "name" => "Personal",
-        //     "slug" => "personal"
-        // ]);
+        Category::create([
+            "name" => "Web Programming",
+            "slug" => "web-programming"
+        ]);
+        Category::create([
+            "name" => "Personal",
+            "slug" => "personal"
+        ]);
+        Category::create([
+            "name" => "Mobile Programming",
+            "slug" => "mobile-programming"
+        ]);
 
-        Blog::factory(5)->create();
+        Blog::factory(50)->create();
     }
 }
