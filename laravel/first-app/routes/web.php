@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Blog;
-use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
@@ -48,20 +46,3 @@ Route::get('/categories', function () {
         "categories" => Category::all(),
     ]);
 });
-
-// Route::get('/category/{category:slug}', function (Category $category) {
-//     return view('blog', [
-//         "title" => "Post by Category : $category->name",
-//         "active" => "categories",
-//         "blogs" => $category->blogs->load('author', 'category'), //eager lazy loading using `load`
-//     ]);
-// });
-
-//make sure the name in the path is the same as in the param closure
-// Route::get('/author/{author:name}', function (User $author) {
-//     return view('blog', [
-//         "title" => "Post by Author : $author->name",
-//         "active" => "categories",
-//         "blogs" => $author->blogs->load('category', 'author'),
-//     ]);
-// });
