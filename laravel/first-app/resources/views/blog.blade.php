@@ -69,4 +69,8 @@
         </div>
     </div>
     @endif
+    {{-- add pagination  --}}
+    <div class="d-flex justify-content-end">
+        {{ $blogs->links() }}
+    </div>
 @endsection

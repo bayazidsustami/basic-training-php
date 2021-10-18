@@ -29,7 +29,9 @@ class BlogController extends Controller
             //"blogs" => Blog::all(),
             //"blogs" => Blog::latest()->get(),
             //eager loading using `with` resolve N+1 prombles
-            "blogs" => Blog::latest()->filter(request(['search', 'category', 'author']))->get(),
+            "blogs" => Blog::latest()->filter(request(['search', 'category', 'author']))
+                ->paginate(7)
+                ->withQueryString(),
         ]);
     }
 
