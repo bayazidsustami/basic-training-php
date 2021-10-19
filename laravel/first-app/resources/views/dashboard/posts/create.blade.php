@@ -40,7 +40,9 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
+            <img id="img-preview" class="img-preview img-fluid mb-3 col-sm-5">
+            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
+                onchange="loadFile(event)">
             @error('image')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -66,12 +68,22 @@
     title.addEventListener('change', function(){
         fetch('/dashboard/blogs/checkSlug?title=' + title.value)
             .then(response => response.json())
-            .then(data => slug.value = data.slug)
+            .then(data => slug.value = data.slug);
     });
 
     document.addEventListener('trix-file-accept', function(e){
         e.preventDefault();
     });
 
+</script>
+<script>
+    var loadFile = function(event) {
+    var output = document.getElementById('img-preview');
+    output.style.display = 'block';
+    output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
 </script>
 @endsection
