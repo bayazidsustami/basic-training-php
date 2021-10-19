@@ -68,7 +68,7 @@ class DashboardPostController extends Controller
     {
         //
         return view('dashboard.posts.show', [
-            "post" => $blog
+            "post" => $blog,
         ]);
     }
 
@@ -81,6 +81,10 @@ class DashboardPostController extends Controller
     public function edit(Blog $blog)
     {
         //
+        return view('dashboard.posts.edit', [
+            "blog" => $blog,
+            "categories" => Category::all()
+        ]);
     }
 
     /**
@@ -92,7 +96,25 @@ class DashboardPostController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        //
+        $rules = [
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'body' => 'required',
+        ];
+
+        if ($request->slug != $blog->slug) {
+            $rules['slug'] = 'required|unique:blogs';
+        }
+
+        $validateData = $request->validate($rules);
+
+        $validateData['user_id'] = auth()->user()->id;
+        $validateData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+
+        Blog::where('id', $blog->id)
+            ->update($validateData);
+
+        return redirect("/dashboard/blogs")->with('success', "Post has been updated");
     }
 
     /**
@@ -103,7 +125,8 @@ class DashboardPostController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        Blog::destroy($blog->id);
+        return redirect('/dashboard/blogs')->with('success', 'Post successfull deleted');
     }
 
     public function checkSlug(Request $request)
