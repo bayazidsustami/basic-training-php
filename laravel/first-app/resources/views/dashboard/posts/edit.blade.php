@@ -4,7 +4,7 @@
     <h1 class="h2">Edit Post</h1>
 </div>
 <div class="col-lg-8">
-    <form method="post" action="/dashboard/blogs/{{ $blog->slug }}" class="mb-5">
+    <form method="post" action="/dashboard/blogs/{{ $blog->slug }}" class="mb-5" enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="mb-3">
@@ -40,6 +40,23 @@
             </select>
         </div>
         <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="hidden" name="oldImage" value="{{ $blog->image }}">
+            @if($blog->image)
+            <img src="{{ asset('storage/' . $blog->image) }}" id="img-preview"
+                class="img-preview img-fluid mb-3 col-sm-5 d-block">
+            @else
+
+            @endif
+            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"
+                onchange="loadFile(event)">
+            @error('image')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="body" class="form-label">Body</label>
             <input id="body" type="hidden" name="body" value="{{ old('body', $blog->body) }}">
             <trix-editor input="body"></trix-editor>
@@ -65,5 +82,15 @@
         e.preventDefault();
     });
 
+</script>
+<script>
+    var loadFile = function(event) {
+    var output = document.getElementById('img-preview');
+    output.style.display = 'block';
+    output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
 </script>
 @endsection
