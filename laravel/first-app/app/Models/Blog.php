@@ -65,4 +65,9 @@ class Blog extends Model
             )
         );
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
