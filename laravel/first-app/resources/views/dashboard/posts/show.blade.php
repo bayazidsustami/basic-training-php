@@ -12,8 +12,15 @@
                 <button class="btn btn-danger" onclick="return confirm('are you sure?')"><span
                         data-feather="x-circle"></span> delete</button>
             </form>
+            @if($post->image)
+            <div style="max-height: 350px; overflow:hidden;">
+                <img class="img-fluid mt-2" src="{{ asset('storage/' . $post->image) }}"
+                    alt="{{ $post->category->name }}">
+            </div>
+            @else
             <img class="img-fluid mt-2" src="https://source.unsplash.com/1200x400?{{ $post->category->name }}"
                 alt="{{ $post->category->name }}">
+            @endif
             {{-- {{ $post->body }} with escaping character --}}
             <article class="my-3 fs-5">
                 {!! $post->body !!}
